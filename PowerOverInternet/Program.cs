@@ -1,7 +1,4 @@
-using Kasa.Log;
-using PowerOverInternet;
 using PowerOverInternet.Services;
-using LoggerFactory = slf4net.LoggerFactory;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -11,8 +8,6 @@ if (!builder.Environment.IsDevelopment()) {
 }
 
 WebApplication app = builder.Build();
-
-LoggerFactory.SetFactoryResolver(new LoggerFactoryResolver(new MicrosoftLoggerFactory(app.Services.GetRequiredService<ILoggerFactory>())));
 
 app.UseHttpsRedirection();
 app.MapControllers();

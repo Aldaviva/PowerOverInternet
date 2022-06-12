@@ -4,17 +4,11 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <RollForward>major</RollForward>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-      <PackageReference Include="slf4net" Version="1.1.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="Kasa">
-        <HintPath>..\..\Kasa\Kasa\bin\Debug\netstandard2.0\Kasa.dll</HintPath>
-      </Reference>
+      <PackageReference Include="Kasa" Version="0.0.0" />
     </ItemGroup>
 
 </Project>

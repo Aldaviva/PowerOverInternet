@@ -1,0 +1,1 @@
+dotnet publish PowerOverInternet --configuration Release -p:PublishSingleFile=false -r win10-x64 --self-contained false --nologo

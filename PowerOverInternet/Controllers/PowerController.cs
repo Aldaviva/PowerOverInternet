@@ -17,10 +17,10 @@ public class PowerController: ControllerBase {
 
     [HttpPut]
     public IActionResult setOutletPower([FromQuery] string outletHostname, [FromQuery] bool turnOn, [FromQuery] int delaySec = 0) {
-        logger.LogInformation("Will turn {name} {state} in {sec:N0} seconds", outletHostname, turnOn ? "on" : "off", delaySec);
+        logger.LogInformation("{name} will turn {state} in {sec:N0} seconds", outletHostname, turnOn ? "on" : "off", delaySec);
 
         Task.Delay(TimeSpan.FromSeconds(delaySec))
-            .ContinueWith(task => outletService.setPowerState(outletHostname, turnOn));
+            .ContinueWith(_ => outletService.setPowerState(outletHostname, turnOn));
 
         return NoContent();
     }
