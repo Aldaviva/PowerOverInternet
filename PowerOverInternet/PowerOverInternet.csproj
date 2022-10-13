@@ -5,10 +5,11 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RollForward>major</RollForward>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Kasa" Version="0.0.0" />
+        <PackageReference Include="Kasa" Version="0.0.0" />
     </ItemGroup>
 
 </Project>

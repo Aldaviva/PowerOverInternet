@@ -1,0 +1,33 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    env:
+      ProjectName: PowerOverInternet
+      TargetPlatform: win10-x64
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Clone
+      uses: actions/checkout@v3
+    
+    - name: Restore
+      run: dotnet restore ${{ env.ProjectName }} --locked-mode --runtime ${{ env.TargetPlatform }} --verbosity normal
+
+    - name: Build
+      run: dotnet build ${{ env.ProjectName }} --no-restore --configuration Release --runtime ${{ env.TargetPlatform }} --no-self-contained
+
+    - name: Publish
+      run: dotnet publish ${{ env.ProjectName }} --no-build --configuration Release -p:PublishSingleFile=true --runtime ${{ env.TargetPlatform }} --no-self-contained
+      
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ env.ProjectName }}
+        path: ${{ env.ProjectName }}\bin\Release\**\publish\*
