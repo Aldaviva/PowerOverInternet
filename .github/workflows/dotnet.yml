@@ -24,7 +24,10 @@ jobs:
       run: dotnet build ${{ env.ProjectName }} --no-restore --configuration Release --runtime ${{ env.TargetPlatform }} --no-self-contained
 
     - name: Publish
-      run: dotnet publish ${{ env.ProjectName }} --no-build --configuration Release -p:PublishSingleFile=false --runtime ${{ env.TargetPlatform }} --no-self-contained
+      run: |
+        dotnet publish ${{ env.ProjectName }} --no-build --configuration Release -p:PublishSingleFile=false --runtime ${{ env.TargetPlatform }} --no-self-contained
+        Remove-Item .\${{ env.ProjectName }}\bin\Release\net6.0\${{ env.TargetPlatform }}\publish\appsettings.Development.json
+        Remove-Item .\${{ env.ProjectName }}\bin\Release\net6.0\${{ env.TargetPlatform }}\publish\${{ env.ProjectName }}.pdb
       
     - name: Upload artifacts
       uses: actions/upload-artifact@v3

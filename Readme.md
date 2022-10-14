@@ -99,7 +99,7 @@ await xapi.Command.HttpClient.Put({
 
 This [Automate](https://llamalab.com/automate/) flow turns off a phone charger when the phone is ≥80% charged, and turns it back on when it's ≤20% charged.
 
-[**Download**](https://raw.githubusercontent.com/Aldaviva/PowerOverInternet/master/.github/files/charging-limiter.flo)
+[**Download flow**](https://raw.githubusercontent.com/Aldaviva/PowerOverInternet/master/.github/files/charging-limiter.flo)
 
 ![Automate flow](https://raw.githubusercontent.com/Aldaviva/PowerOverInternet/master/.github/images/charging-limiter.png)
 
