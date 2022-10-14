@@ -6,6 +6,14 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <RollForward>major</RollForward>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+        <Authors>Ben Hutchison</Authors>
+        <Copyright>© 2022 Ben Hutchison</Copyright>
+        <Version>1.0.0</Version>
+        <FileVersion>1.0.0</FileVersion>
+        <Company>Ben Hutchison</Company>
+        <Product>Power Over Internet</Product>
+        <Description>Power Over Internet</Description>
+        <AssemblyTitle>Power Over Internet</AssemblyTitle>
     </PropertyGroup>
 
     <ItemGroup>
