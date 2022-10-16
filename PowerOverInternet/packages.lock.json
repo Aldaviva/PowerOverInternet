@@ -4,9 +4,9 @@
     "net6.0": {
       "Kasa": {
         "type": "Direct",
-        "requested": "[0.0.0, )",
-        "resolved": "0.0.0",
-        "contentHash": "IcIGhSnv6Tie6cl8uh6PLnAGDmO0hk/DmhLsoka0r22ICDPXd/Ulct6LUhKgp1PyWEGdKsz9S/DIuQNhS+c+qw==",
+        "requested": "[1.0.0, )",
+        "resolved": "1.0.0",
+        "contentHash": "630uqanseG7wGiNLfzix0kwKi+y+Kefgx+VvVkjMIKi0vQE6rVE8J4ob+48Y8xjxfE6nGx0YLI1QeDoQxacHdw==",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "6.0.1",
           "Newtonsoft.Json": "13.0.1"
@@ -22,7 +22,6 @@
         "resolved": "13.0.1",
         "contentHash": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A=="
       }
-    },
-    "net6.0/win10-x64": {}
+    }
   }
 }

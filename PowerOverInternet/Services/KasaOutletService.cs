@@ -14,7 +14,9 @@ public class KasaOutletService: OutletService {
 
     public async Task setPowerState(string hostname, bool turnOn) {
         using IKasaOutlet outlet = new KasaOutlet(hostname) {
-            LoggerFactory = loggerFactory
+            Options = new Options {
+                LoggerFactory = loggerFactory
+            }
         };
         logger.LogInformation("Turning outlet {hostname} {state} now", hostname, turnOn ? "on" : "off");
         await outlet.System.SetOutletOn(turnOn);

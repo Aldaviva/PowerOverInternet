@@ -17,7 +17,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kasa" Version="0.0.0" />
+        <PackageReference Include="Kasa" Version="1.0.0" />
     </ItemGroup>
 
 </Project>
