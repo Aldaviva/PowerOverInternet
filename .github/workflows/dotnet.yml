@@ -9,7 +9,6 @@ jobs:
   build:
     env:
       ProjectName: PowerOverInternet
-      TargetPlatform: win10-x64
 
     runs-on: windows-latest
 
@@ -18,16 +17,17 @@ jobs:
       uses: actions/checkout@v3
     
     - name: Restore
-      run: dotnet restore ${{ env.ProjectName }} --locked-mode --runtime ${{ env.TargetPlatform }} --verbosity normal
+      run: dotnet restore ${{ env.ProjectName }} --locked-mode --verbosity normal
 
     - name: Build
-      run: dotnet build ${{ env.ProjectName }} --no-restore --configuration Release --runtime ${{ env.TargetPlatform }} --no-self-contained
+      run: dotnet build ${{ env.ProjectName }} --no-restore --configuration Release
 
     - name: Publish
       run: |
-        dotnet publish ${{ env.ProjectName }} --no-build --configuration Release -p:PublishSingleFile=false --runtime ${{ env.TargetPlatform }} --no-self-contained
+        dotnet publish ${{ env.ProjectName }} --no-build --configuration Release -p:PublishSingleFile=false --no-self-contained
         Remove-Item .\${{ env.ProjectName }}\bin\Release\net6.0\${{ env.TargetPlatform }}\publish\appsettings.Development.json
         Remove-Item .\${{ env.ProjectName }}\bin\Release\net6.0\${{ env.TargetPlatform }}\publish\${{ env.ProjectName }}.pdb
+        Remove-Item .\${{ env.ProjectName }}\bin\Release\net6.0\${{ env.TargetPlatform }}\publish\packages.lock.json
       
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
