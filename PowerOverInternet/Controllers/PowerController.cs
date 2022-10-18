@@ -17,6 +17,7 @@ public class PowerController: ControllerBase {
 
     [HttpPut]
     public IActionResult setOutletPower([FromQuery] string outletHostname, [FromQuery] bool turnOn, [FromQuery] int delaySec = 0) {
+        delaySec = Math.Max(0, delaySec);
         logger.LogInformation("{name} will turn {state} in {sec:N0} seconds", outletHostname, turnOn ? "on" : "off", delaySec);
 
         Task.Delay(TimeSpan.FromSeconds(delaySec))

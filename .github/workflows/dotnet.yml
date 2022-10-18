@@ -25,12 +25,12 @@ jobs:
     - name: Publish
       run: |
         dotnet publish ${{ env.ProjectName }} --no-build --configuration Release -p:PublishSingleFile=false --no-self-contained
-        Remove-Item .\${{ env.ProjectName }}\bin\Release\net6.0\${{ env.TargetPlatform }}\publish\appsettings.Development.json
-        Remove-Item .\${{ env.ProjectName }}\bin\Release\net6.0\${{ env.TargetPlatform }}\publish\${{ env.ProjectName }}.pdb
-        Remove-Item .\${{ env.ProjectName }}\bin\Release\net6.0\${{ env.TargetPlatform }}\publish\packages.lock.json
+        Remove-Item .\${{ env.ProjectName }}\bin\Release\net6.0\publish\appsettings.Development.json
+        Remove-Item .\${{ env.ProjectName }}\bin\Release\net6.0\publish\${{ env.ProjectName }}.pdb
+        Remove-Item .\${{ env.ProjectName }}\bin\Release\net6.0\publish\packages.lock.json
       
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
         name: ${{ env.ProjectName }}
-        path: ${{ env.ProjectName }}\bin\Release\net6.0\${{ env.TargetPlatform }}\publish\*
+        path: ${{ env.ProjectName }}\bin\Release\net6.0\publish\*
