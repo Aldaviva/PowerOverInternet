@@ -4,12 +4,13 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <LangVersion>latest</LangVersion>
         <RollForward>major</RollForward>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
         <Authors>Ben Hutchison</Authors>
         <Copyright>© 2022 Ben Hutchison</Copyright>
-        <Version>1.0.1</Version>
-        <FileVersion>1.0.1</FileVersion>
+        <Version>1.0.2</Version>
+        <FileVersion>1.0.2</FileVersion>
         <Company>Ben Hutchison</Company>
         <Product>Power Over Internet</Product>
         <Description>Power Over Internet</Description>
@@ -18,6 +19,10 @@
 
     <ItemGroup>
         <PackageReference Include="Kasa" Version="1.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Tests" />
     </ItemGroup>
 
 </Project>
