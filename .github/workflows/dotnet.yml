@@ -25,7 +25,7 @@ jobs:
       run: dotnet restore --locked-mode --verbosity normal
 
     - name: Build
-      run: dotnet build --no-restore --configuration Release
+      run: dotnet build --no-restore --configuration Release --verbosity normal
 
     - name: Test
       run: |
@@ -44,7 +44,7 @@ jobs:
       with:
         name: ${{ env.ProjectName }}
         path: ${{ env.ProjectName }}\bin\Release\net6.0\publish\*
-    
+
     - name: Upload test report
       run: testspace Tests/TestResults/TestResults.xml
 
