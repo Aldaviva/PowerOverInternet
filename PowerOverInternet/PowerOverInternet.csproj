@@ -8,7 +8,7 @@
         <RollForward>major</RollForward>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
         <Authors>Ben Hutchison</Authors>
-        <Copyright>© 2022 Ben Hutchison</Copyright>
+        <Copyright>© 2023 Ben Hutchison</Copyright>
         <Version>1.0.2</Version>
         <FileVersion>1.0.2</FileVersion>
         <Company>Ben Hutchison</Company>
@@ -18,7 +18,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kasa" Version="1.0.0" />
+        <PackageReference Include="Kasa" Version="1.0.1" />
     </ItemGroup>
 
     <ItemGroup>
