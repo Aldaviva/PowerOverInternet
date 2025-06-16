@@ -1,28 +1,28 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>latest</LangVersion>
-        <RollForward>major</RollForward>
+        <RollForward>latestMajor</RollForward>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
         <Authors>Ben Hutchison</Authors>
-        <Copyright>© 2023 Ben Hutchison</Copyright>
-        <Version>1.0.2</Version>
-        <FileVersion>1.0.2</FileVersion>
-        <Company>Ben Hutchison</Company>
-        <Product>Power Over Internet</Product>
-        <Description>Power Over Internet</Description>
+        <Copyright>© 2025 $(Authors)</Copyright>
+        <Company>$(Authors)</Company>
         <AssemblyTitle>Power Over Internet</AssemblyTitle>
+        <Product>$(AssemblyTitle)</Product>
+        <Version>1.1.0</Version>
+        <NoWarn>$(NoWarn);CS8524</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kasa" Version="1.0.1" />
+        <InternalsVisibleTo Include="Tests" />
+        <None Include="..\Readme.md" />
     </ItemGroup>
 
     <ItemGroup>
-        <InternalsVisibleTo Include="Tests" />
+        <PackageReference Include="Kasa" Version="1.1.0" />
     </ItemGroup>
 
 </Project>

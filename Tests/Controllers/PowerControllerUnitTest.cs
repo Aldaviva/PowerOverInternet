@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
-using Microsoft.Extensions.Logging.Abstractions;
+﻿using Microsoft.Extensions.Logging.Abstractions;
 using PowerOverInternet.Controllers;
 using PowerOverInternet.Services;
+using System.Diagnostics;
 
 namespace Tests.Controllers;
 
@@ -16,7 +16,7 @@ public class PowerControllerUnitTest {
     public PowerControllerUnitTest() {
         powerController = new PowerController(NullLogger<PowerController>.Instance, outletService);
 
-        A.CallTo(() => outletService.setPowerState(A<string>._, A<bool>._)).Invokes(() => calledSetPowerState.Set());
+        A.CallTo(() => outletService.setPowerState(A<string>._, A<bool>._, A<int?>._)).Invokes(() => calledSetPowerState.Set());
     }
 
     [Fact]
@@ -25,7 +25,7 @@ public class PowerControllerUnitTest {
 
         calledSetPowerState.Wait(QUIESCENCE_TIME);
 
-        A.CallTo(() => outletService.setPowerState("192.168.1.100", true)).MustHaveHappenedOnceExactly();
+        A.CallTo(() => outletService.setPowerState("192.168.1.100", true, null)).MustHaveHappenedOnceExactly();
     }
 
     [Fact]
@@ -34,19 +34,37 @@ public class PowerControllerUnitTest {
 
         calledSetPowerState.Wait(QUIESCENCE_TIME);
 
-        A.CallTo(() => outletService.setPowerState("192.168.1.100", false)).MustHaveHappenedOnceExactly();
+        A.CallTo(() => outletService.setPowerState("192.168.1.100", false, null)).MustHaveHappenedOnceExactly();
+    }
+
+    [Fact]
+    public void setOutletOnMultiSocket() {
+        powerController.setOutletPower("192.168.1.100", true, 0);
+
+        calledSetPowerState.Wait(QUIESCENCE_TIME);
+
+        A.CallTo(() => outletService.setPowerState("192.168.1.100", true, 0)).MustHaveHappenedOnceExactly();
+    }
+
+    [Fact]
+    public void setOutletOffMultiSocket() {
+        powerController.setOutletPower("192.168.1.100", false, 1);
+
+        calledSetPowerState.Wait(QUIESCENCE_TIME);
+
+        A.CallTo(() => outletService.setPowerState("192.168.1.100", false, 1)).MustHaveHappenedOnceExactly();
     }
 
     [Fact]
     public void setOutletAfterDelay() {
         Stopwatch stopwatch = Stopwatch.StartNew();
 
-        powerController.setOutletPower("192.168.1.100", false, 2);
+        powerController.setOutletPower("192.168.1.100", false, delaySec: 2);
 
         calledSetPowerState.Wait(TimeSpan.FromSeconds(2) + QUIESCENCE_TIME);
         stopwatch.Stop();
 
-        A.CallTo(() => outletService.setPowerState("192.168.1.100", false)).MustHaveHappenedOnceExactly();
+        A.CallTo(() => outletService.setPowerState("192.168.1.100", false, null)).MustHaveHappenedOnceExactly();
         stopwatch.Elapsed.Should().BeGreaterOrEqualTo(TimeSpan.FromSeconds(2) - QUIESCENCE_TIME);
         stopwatch.Elapsed.Should().BeLessOrEqualTo(TimeSpan.FromSeconds(2) + QUIESCENCE_TIME);
     }
@@ -54,12 +72,12 @@ public class PowerControllerUnitTest {
     [Fact]
     public void setOutletClipsNegativeDelaysToZero() {
         Stopwatch stopwatch = Stopwatch.StartNew();
-        powerController.setOutletPower("192.168.1.100", false, -1);
+        powerController.setOutletPower("192.168.1.100", false, delaySec: -1);
 
         calledSetPowerState.Wait(QUIESCENCE_TIME);
         stopwatch.Stop();
 
-        A.CallTo(() => outletService.setPowerState("192.168.1.100", false)).MustHaveHappenedOnceExactly();
+        A.CallTo(() => outletService.setPowerState("192.168.1.100", false, null)).MustHaveHappenedOnceExactly();
         stopwatch.Elapsed.Should().BeLessOrEqualTo(QUIESCENCE_TIME);
     }
 

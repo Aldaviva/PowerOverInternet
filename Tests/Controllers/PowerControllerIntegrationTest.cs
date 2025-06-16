@@ -1,8 +1,8 @@
-﻿using System.Net;
-using Kasa;
+﻿using Kasa;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using PowerOverInternet.Services;
+using System.Net;
 
 namespace Tests.Controllers;
 
@@ -27,7 +27,16 @@ public class PowerControllerIntegrationTest: IDisposable {
 
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);
 
-        A.CallTo(() => outletService.setPowerState("192.168.1.100", true)).MustHaveHappenedOnceExactly();
+        A.CallTo(() => outletService.setPowerState("192.168.1.100", true, null)).MustHaveHappenedOnceExactly();
+    }
+
+    [Fact]
+    public async Task putPowerMultiSocket() {
+        HttpResponseMessage response = await client.PutAsync("/power?outletHostname=192.168.1.100&turnOn=true&socketId=0", null);
+
+        response.StatusCode.Should().Be(HttpStatusCode.NoContent);
+
+        A.CallTo(() => outletService.setPowerState("192.168.1.100", true, 0)).MustHaveHappenedOnceExactly();
     }
 
     [Fact]
@@ -36,6 +45,16 @@ public class PowerControllerIntegrationTest: IDisposable {
 
         using IKasaOutlet outlet = factory("192.168.1.100");
         outlet.Should().BeOfType<KasaOutlet>();
+        outlet.Hostname.Should().Be("192.168.1.100");
+        outlet.Options.LoggerFactory.Should().NotBeNull();
+    }
+
+    [Fact]
+    public void multiSocketOutletFactory() {
+        var factory = webapp.Services.GetService<Func<string, IMultiSocketKasaOutlet>>()!;
+
+        using IMultiSocketKasaOutlet outlet = factory("192.168.1.100");
+        outlet.Should().BeOfType<MultiSocketKasaOutlet>();
         outlet.Hostname.Should().Be("192.168.1.100");
         outlet.Options.LoggerFactory.Should().NotBeNull();
     }

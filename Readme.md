@@ -78,6 +78,13 @@ PUT /power?outletHostname=192.168.1.100&turnOn=false
 Host: myserver.com
 ```
 
+### Toggle an outlet
+
+```http
+PUT /power?outletHostname=192.168.1.100&turnOn=toggle
+Host: myserver.com
+```
+
 ### Turn off an outlet after 30 seconds
 
 ```http
@@ -113,7 +120,8 @@ This flow requires the [Automate legacy extension](https://llamalab.com/automate
 |Parameter|Required|Location|Example|Description|
 |---|---|---|---|---|
 |`outletHostname`|🛑&nbsp;required|❔&nbsp;query|`192.168.1.100`|The IP address or FQDN of your smart outlet, visible in router DHCP list or [`nmap`](https://nmap.org/) scan.|
-|`turnOn`|🛑&nbsp;required|❔&nbsp;query|`true`|`true` to turn the outlet on, or `false` to turn it off.|
+|`turnOn`|🛑&nbsp;required|❔&nbsp;query|`true`|`true` to turn the outlet on, `false` to turn it off, or `toggle` to change its state.|
+|`socketId`|🟢&nbsp;optional|❔&nbsp;query|`0`|If your Kasa smart outlet has multiple electrical sockets (such as the EP40), you can specify which outlet to turn on or off, starting from `0`. Defaults to `0` if omitted, which also works with single-socket oulets like the EP10.|
 |`delaySec`|🟢&nbsp;optional|❔&nbsp;query|`30`|Number of seconds to wait after receiving the request before changing the outlet's power state. Defaults to `0` if omitted.|
 
 **Response status:** `204 No Content`

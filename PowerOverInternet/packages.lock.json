@@ -1,21 +1,29 @@
 {
   "version": 1,
   "dependencies": {
-    "net6.0": {
+    "net8.0": {
       "Kasa": {
         "type": "Direct",
-        "requested": "[1.0.1, )",
-        "resolved": "1.0.1",
-        "contentHash": "9GfMoLFCgE+xCcKbXA7uKPFlsPlZbRe88etgIPRX2hnscO8T0AOqUrz3cadDkRKiUykcKfdYS0xWDPzOwf9S1w==",
+        "requested": "[1.1.0, )",
+        "resolved": "1.1.0",
+        "contentHash": "kis4YX6p4uyaC4rqQSwkcS8NARlR9C8WOh/2go8FjuU2/Uasui3M85q99zwvWrJ1kda1QEDnP/IZKgnUbBEugA==",
         "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "7.0.1",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.3",
           "Newtonsoft.Json": "13.0.3"
         }
       },
+      "Microsoft.Extensions.DependencyInjection.Abstractions": {
+        "type": "Transitive",
+        "resolved": "8.0.2",
+        "contentHash": "3iE7UF7MQkCv1cxzCahz+Y/guQbTqieyxyaWKhrRO91itI9cOKO76OHeQDahqG4MmW5umr3CcCvGmK92lWNlbg=="
+      },
       "Microsoft.Extensions.Logging.Abstractions": {
         "type": "Transitive",
-        "resolved": "7.0.1",
-        "contentHash": "pkeBFx0vqMW/A3aUVHh7MPu3WkBhaVlezhSZeb1c9XD0vUReYH1TLFSy5MxJgZfmz5LZzYoErMorlYZiwpOoNA=="
+        "resolved": "8.0.3",
+        "contentHash": "dL0QGToTxggRLMYY4ZYX5AMwBb+byQBd/5dMiZE07Nv73o6I5Are3C7eQTh7K2+A4ct0PVISSr7TZANbiNb2yQ==",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2"
+        }
       },
       "Newtonsoft.Json": {
         "type": "Transitive",

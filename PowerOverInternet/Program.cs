@@ -2,15 +2,24 @@ using Kasa;
 using PowerOverInternet.Services;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddControllers();
-builder.Services.AddScoped<OutletService, KasaOutletService>();
-builder.Services.AddScoped<Func<string, IKasaOutlet>>(provider => hostname => new KasaOutlet(hostname, new Options { LoggerFactory = provider.GetService<ILoggerFactory>() }));
+builder.Services
+    .AddSingleton<OutletService, KasaOutletService>()
+    .AddSingleton<Func<string, IKasaOutlet>>(provider => hostname => new KasaOutlet(hostname, new Options {
+        LoggerFactory = provider.GetService<ILoggerFactory>()
+    }))
+    .AddSingleton<Func<string, IMultiSocketKasaOutlet>>(provider => hostname => new MultiSocketKasaOutlet(hostname, new Options {
+        LoggerFactory = provider.GetService<ILoggerFactory>()
+    }));
+
 if (!builder.Environment.IsDevelopment()) {
     builder.Services.AddHttpsRedirection(options => { options.HttpsPort = 8444; });
 }
 
-WebApplication app = builder.Build();
+await using WebApplication app = builder.Build();
 
 app.UseHttpsRedirection();
 app.MapControllers();
-app.Run();
+
+await app.RunAsync();
