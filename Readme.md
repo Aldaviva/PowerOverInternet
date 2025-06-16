@@ -17,9 +17,9 @@
 <a id="prerequisites"></a>
 ## Prerequisites
 
-- [ASP.NET Core Runtime 6 or later](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- [ASP.NET Core Runtime 8 or later](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 - [Kasa smart outlet](https://www.kasasmart.com/us/products/smart-plugs)
-    - Verified with [EP10](https://www.kasasmart.com/us/products/smart-plugs/kasa-smart-plug-mini-ep10) and [KP125](https://www.kasasmart.com/us/products/smart-plugs/kasa-smart-plug-slim-energy-monitoring-kp125)
+    - Verified with [EP10](https://www.kasasmart.com/us/products/smart-plugs/kasa-smart-plug-mini-ep10), [KP125](https://www.kasasmart.com/us/products/smart-plugs/kasa-smart-plug-slim-energy-monitoring-kp125), and [EP40](https://www.kasasmart.com/us/products/smart-plugs/kasa-smart-wi-fi-outdoor-plug)
     - Probably [compatible](https://github.com/Aldaviva/Kasa#prerequisites) with most other models
 
 <a id="installation"></a>
@@ -33,6 +33,7 @@ For additional hosting and deployment scenarios not covered in this section, suc
 1. Copy the build files from the [latest release of this project](https://github.com/Aldaviva/PowerOverInternet/releases/latest) to a folder on your server.
 1. In IIS Manager, add a new Website to your server's Sites.
 1. Choose a name and binding for the site.
+1. Make a new empty Application Pool for the site.
 1. Choose that folder as the site's physical path.
 
 For more information, refer to [Host ASP.NET Core on Windows with IIS](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/?view=aspnetcore-6.0) and [Publish an ASP.NET Core app to IIS](https://learn.microsoft.com/en-us/aspnet/core/tutorials/publish-to-iis?view=aspnetcore-6.0&tabs=netcore-cli).
@@ -92,6 +93,13 @@ PUT /power?outletHostname=192.168.1.100&turnOn=false&delaySec=30
 Host: myserver.com
 ```
 
+### Turn on the second socket of a multi-socket outlet
+
+```http
+PUT /power?outletHostname=192.168.1.101&socketId=1&turnOn=true
+Host: myserver.com
+```
+
 ### Shut down and power off Cisco endpoint using macro
 
 This [Cisco macro](https://gist.github.com/Aldaviva/bccd766099e2d7807da086feacf2c18a#file-shutdown-button-js-L22) cuts power to the endpoint after a confirmation prompt and a 33 second graceful shutdown delay.
@@ -121,8 +129,8 @@ This flow requires the [Automate legacy extension](https://llamalab.com/automate
 |---|---|---|---|---|
 |`outletHostname`|🛑&nbsp;required|❔&nbsp;query|`192.168.1.100`|The IP address or FQDN of your smart outlet, visible in router DHCP list or [`nmap`](https://nmap.org/) scan.|
 |`turnOn`|🛑&nbsp;required|❔&nbsp;query|`true`|`true` to turn the outlet on, `false` to turn it off, or `toggle` to change its state.|
-|`socketId`|🟢&nbsp;optional|❔&nbsp;query|`0`|If your Kasa smart outlet has multiple electrical sockets (such as the EP40), you can specify which outlet to turn on or off, starting from `0`. Defaults to `0` if omitted, which also works with single-socket oulets like the EP10.|
 |`delaySec`|🟢&nbsp;optional|❔&nbsp;query|`30`|Number of seconds to wait after receiving the request before changing the outlet's power state. Defaults to `0` if omitted.|
+|`socketId`|🟢&nbsp;optional|❔&nbsp;query|`0`|If your Kasa smart outlet has multiple electrical sockets (such as the EP40), you can specify which socket to turn on or off, starting from `0`. Defaults to `0` if omitted, which also works with single-socket outlets like the EP10.|
 
 **Response status:** `204 No Content`
 
