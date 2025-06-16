@@ -37,7 +37,6 @@ jobs:
         dotnet publish ${{ env.ProjectName }} --no-build --configuration Release -p:PublishSingleFile=false --no-self-contained --verbosity normal
         Remove-Item .\${{ env.ProjectName }}\bin\Release\net8.0\publish\appsettings.Development.json
         Remove-Item .\${{ env.ProjectName }}\bin\Release\net8.0\publish\${{ env.ProjectName }}.pdb
-        Remove-Item .\${{ env.ProjectName }}\bin\Release\net8.0\publish\packages.lock.json
       
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
