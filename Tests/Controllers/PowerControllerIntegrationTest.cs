@@ -1,6 +1,7 @@
-﻿using Kasa;
+using Kasa;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+using PowerOverInternet.Controllers;
 using PowerOverInternet.Services;
 using System.Net;
 
@@ -27,7 +28,7 @@ public class PowerControllerIntegrationTest: IDisposable {
 
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);
 
-        A.CallTo(() => outletService.setPowerState("192.168.1.100", true, null)).MustHaveHappenedOnceExactly();
+        A.CallTo(() => outletService.setPowerState("192.168.1.100", OutletAction.TRUE, null)).MustHaveHappenedOnceExactly();
     }
 
     [Fact]
@@ -36,7 +37,7 @@ public class PowerControllerIntegrationTest: IDisposable {
 
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);
 
-        A.CallTo(() => outletService.setPowerState("192.168.1.100", true, 0)).MustHaveHappenedOnceExactly();
+        A.CallTo(() => outletService.setPowerState("192.168.1.100", OutletAction.TRUE, 0)).MustHaveHappenedOnceExactly();
     }
 
     [Fact]
