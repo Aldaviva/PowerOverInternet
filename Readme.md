@@ -29,14 +29,14 @@ For additional hosting and deployment scenarios not covered in this section, suc
 
 ### IIS
 
-1. Install the [.NET Core Hosting Bundle](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/hosting-bundle?view=aspnetcore-6.0) for IIS.
+1. Install the [.NET Core Hosting Bundle](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/hosting-bundle?view=aspnetcore-8.0) for IIS.
 1. Copy the build files from the [latest release of this project](https://github.com/Aldaviva/PowerOverInternet/releases/latest) to a folder on your server.
 1. In IIS Manager, add a new Website to your server's Sites.
 1. Choose a name and binding for the site.
 1. Make a new empty Application Pool for the site.
 1. Choose that folder as the site's physical path.
 
-For more information, refer to [Host ASP.NET Core on Windows with IIS](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/?view=aspnetcore-6.0) and [Publish an ASP.NET Core app to IIS](https://learn.microsoft.com/en-us/aspnet/core/tutorials/publish-to-iis?view=aspnetcore-6.0&tabs=netcore-cli).
+For more information, refer to [Host ASP.NET Core on Windows with IIS](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/?view=aspnetcore-8.0) and [Publish an ASP.NET Core app to IIS](https://learn.microsoft.com/en-us/aspnet/core/tutorials/publish-to-iis?view=aspnetcore-8.0&tabs=netcore-cli).
 
 
 ![Add Website](https://raw.githubusercontent.com/Aldaviva/PowerOverInternet/master/.github/images/iis-new-site.png)
